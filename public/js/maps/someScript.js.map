@@ -1,0 +1,1 @@
+{"version":3,"sources":["someScript.js"],"names":["doSomeStuff","console","log"],"mappings":"AAAA,QAASA,eACRC,QAAQC,IAAI","file":"someScript.js","sourcesContent":["function doSomeStuff(){\r\n\tconsole.log(\"This function symple says: hello!!\");\r\n}"],"sourceRoot":"/source/"}
