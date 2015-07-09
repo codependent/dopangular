@@ -1,38 +1,37 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
+var plugins = require('gulp-load-plugins')();
 var del = require('del');
-var livereload = require('gulp-livereload');
-var uglify = require('gulp-uglify');
 
 gulp.task('clean-css', require('del').bind(null, ['./public/css']));
 
-gulp.task('clean-js', require('del').bind(null, ['./public/css']));
+gulp.task('clean-js', require('del').bind(null, ['./public/js']));
 
 gulp.task('clean', ['clean-css','clean-js']);
 
 gulp.task('sass', ['clean-css'], function () {
   gulp.src('./resources/sass/**/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(sourcemaps.write('./maps'))
+    .pipe(plugins.sourcemaps.init())
+    .pipe(plugins.sass({outputStyle: 'compressed'}).on('error', plugins.sass.logError))
+    .pipe(plugins.sourcemaps.write('./maps'))
+    //.pipe(plugins.gzip({ append: false }))
     .pipe(gulp.dest('./public/css'))
-    .pipe(livereload());
+    .pipe(plugins.livereload());
 });
 
-gulp.task('compress-js', function() {
+gulp.task('compress-js', ['clean-js'], function() {
   return gulp.src('./resources/js/**/*.js')
-    .pipe(sourcemaps.init())
-    .pipe(uglify())
-    .pipe(sourcemaps.write('./maps'))
+    .pipe(plugins.sourcemaps.init())
+    .pipe(plugins.uglify())
+    .pipe(plugins.sourcemaps.write('./maps'))
+    //.pipe(plugins.gzip({ append: false }))
     .pipe(gulp.dest('./public/js'))
-    .pipe(livereload());
+    .pipe(plugins.livereload());
 });
  
 gulp.task('build', ['sass','compress-js']);
 
 gulp.task('default', ['build'], function(){
-    livereload.listen();
+    plugins.livereload.listen();
     gulp.watch('./resources/sass/**/*.scss', ['sass']);
     gulp.watch('./resources/js/**/*.js', ['compress-js']);
     require("./bin/www");

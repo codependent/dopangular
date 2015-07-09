@@ -1,6 +1,7 @@
 .sass-cache
 *.css.map
 *.css
+/public/js
 /node_modules
 .sublime-gulp.cache
 sublime-gulp.log
