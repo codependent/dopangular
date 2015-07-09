@@ -32,8 +32,8 @@ gulp.task('compress-js', function() {
 gulp.task('build', ['sass','compress-js']);
 
 gulp.task('default', ['build'], function(){
-	livereload.listen();
-	gulp.watch('./resources/sass/**/*.scss', ['sass']);
-	gulp.watch('./resources/js/**/*.js', ['compress-js']);
-	require("./bin/www");
+    livereload.listen();
+    gulp.watch('./resources/sass/**/*.scss', ['sass']);
+    gulp.watch('./resources/js/**/*.js', ['compress-js']);
+    require("./bin/www");
 });
