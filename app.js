@@ -59,10 +59,12 @@ app.use(function(err, req, res, next) {
 });
 
 function setStaticGZipHeaders(res, path){  
-  if(path.endsWith(".js.gz")){
+  if(path.endsWith(".js")){
     res.set({'Content-Encoding': 'gzip' , 'Content-type' : 'text/javascript'});
-  }else if(path.endsWith(".css.gz")){
+  }else if(path.endsWith(".css")){
     res.set({'Content-Encoding': 'gzip' , 'Content-type' : 'text/css'});
+  }else if(path.endsWith(".js.map") || path.endsWith(".css.map")){
+    res.set({'Content-Encoding': 'gzip' , 'Content-type' : 'application/octet-stream'});
   }
 }
 
