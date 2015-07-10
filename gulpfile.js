@@ -2,9 +2,9 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var del = require('del');
 
-gulp.task('clean-css', require('del').bind(null, ['./public/css']));
+gulp.task('clean-css', del.bind(null, ['./public/css']));
 
-gulp.task('clean-js', require('del').bind(null, ['./public/js']));
+gulp.task('clean-js', del.bind(null, ['./public/js']));
 
 gulp.task('clean', ['clean-css','clean-js']);
 
@@ -14,9 +14,12 @@ gulp.task('sass', ['clean-css'], function () {
     .pipe(plugins.sass({outputStyle: 'compressed'}).on('error', plugins.sass.logError))
     .pipe(plugins.rename({extname: '.min.css'}))
     .pipe(plugins.sourcemaps.write('./maps'))
-    .pipe(plugins.gzip({ append: false }))
+    .pipe(plugins.gzip())
     .pipe(gulp.dest('./public/css'))
-    .pipe(plugins.livereload());
+    .pipe(plugins.livereload())
+    .on('end', function() {
+       renameGzippedMapFiles('css');
+    });
 });
 
 gulp.task('compress-js', ['clean-js'], function() {
@@ -25,9 +28,12 @@ gulp.task('compress-js', ['clean-js'], function() {
     .pipe(plugins.uglify())
     .pipe(plugins.rename({extname: '.min.js'}))
     .pipe(plugins.sourcemaps.write('./maps'))
-    .pipe(plugins.gzip({ append: false }))
+    .pipe(plugins.gzip())
     .pipe(gulp.dest('./public/js'))
-    .pipe(plugins.livereload());
+    .pipe(plugins.livereload())
+    .on('end', function() {
+       renameGzippedMapFiles('js');
+    });
 });
  
 gulp.task('build', ['sass','compress-js']);
@@ -37,4 +43,13 @@ gulp.task('default', ['build'], function(){
     gulp.watch('./resources/sass/**/*.scss', ['sass']);
     gulp.watch('./resources/js/**/*.js', ['compress-js']);
     require("./bin/www");
-});
+}); 
+
+function renameGzippedMapFiles(type){
+    gulp.src('./public/'+type+'/maps/**/*.map.gz')
+        .pipe(plugins.rename({extname: ''}))
+        .pipe(gulp.dest('./public/'+type+'/maps'))
+        .on('end', function(){
+            del(['./public/'+type+'/maps/**/*.map.gz']);                
+    });
+}
