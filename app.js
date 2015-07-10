@@ -10,6 +10,8 @@ var users = require('./routes/users');
 
 var app = express();
 
+require('string.prototype.endswith');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -20,7 +22,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {setHeaders : setStaticGZipHeaders}));
 
 app.use('/', routes);
 app.use('/users', users);
@@ -56,5 +58,12 @@ app.use(function(err, req, res, next) {
   });
 });
 
+function setStaticGZipHeaders(res, path){  
+  if(path.endsWith(".js.gz")){
+    res.set({'Content-Encoding': 'gzip' , 'Content-type' : 'text/javascript'});
+  }else if(path.endsWith(".css.gz")){
+    res.set({'Content-Encoding': 'gzip' , 'Content-type' : 'text/css'});
+  }
+}
 
 module.exports = app;

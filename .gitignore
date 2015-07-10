@@ -2,6 +2,7 @@
 *.css.map
 *.css
 /public/js
+/public/css
 /node_modules
 .sublime-gulp.cache
 sublime-gulp.log
