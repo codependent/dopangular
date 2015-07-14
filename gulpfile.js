@@ -1,10 +1,11 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
+var runSequence = require('run-sequence');
 var del = require('del');
 var argv = require('yargs').argv;
 var isDevelopment = (argv.development === undefined) ? false : true;
 
-gulp.task('serve', ['default','build'], function(){
+gulp.task('serve', ['default'], function(){
     plugins.livereload.listen();
     gulp.watch('./resources/sass/**/*.scss', ['sass']);
     gulp.watch('./resources/js/**/*.js', ['compress-js']);
@@ -63,6 +64,6 @@ gulp.task('clean-js', del.bind(null, ['./public/js']));
 
 gulp.task('clean', ['clean-css','clean-js']);
 
-gulp.task('default', ['clean'], function(){
-    gulp.start('build');
+gulp.task('default', function(cb){
+  runSequence('clean','build',cb);
 });
