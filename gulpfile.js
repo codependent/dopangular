@@ -4,22 +4,21 @@ var del = require('del');
 var argv = require('yargs').argv;
 var isDevelopment = (argv.development === undefined) ? false : true;
 
-gulp.task('clean-css', function(){
- del.sync(['./public/css']);
+gulp.task('serve', ['default','build'], function(){
+    plugins.livereload.listen();
+    gulp.watch('./resources/sass/**/*.scss', ['sass']);
+    gulp.watch('./resources/js/**/*.js', ['compress-js']);
+    require("./bin/www");
 });
 
-/*
-gulp.task('clean-css', function(cb){
-  del(['./public/css'], function(err, paths){
-    cb();
-  });
-});*/
+gulp.task('jshint', function () {
+  return gulp.src('./resources/js/**/*.js')
+    .pipe(plugins.jshint())
+    .pipe(plugins.jshint.reporter('jshint-stylish'))
+    .pipe(plugins.jshint.reporter('fail'));
+});
 
-gulp.task('clean-js', del.bind(null, ['./public/js']));
-
-gulp.task('clean', ['clean-css','clean-js']);
-
-gulp.task('sass', ['clean-css'], function () {
+gulp.task('sass', function () {
   var stream = gulp.src('./resources/sass/**/*.scss')
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass({outputStyle: 'compressed'}).on('error', plugins.sass.logError))
@@ -33,7 +32,7 @@ gulp.task('sass', ['clean-css'], function () {
     return stream;
 });
 
-gulp.task('compress-js', ['clean-js'], function() {
+gulp.task('compress-js', function() {
   var stream = gulp.src('./resources/js/**/*.js')
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.uglify())
@@ -47,11 +46,23 @@ gulp.task('compress-js', ['clean-js'], function() {
   return stream;
 });
  
-gulp.task('build', ['sass','compress-js']);
+gulp.task('build', ['jshint','compress-js','sass']);
 
-gulp.task('default', ['build'], function(){
-    plugins.livereload.listen();
-    gulp.watch('./resources/sass/**/*.scss', ['sass']);
-    gulp.watch('./resources/js/**/*.js', ['compress-js']);
-    require("./bin/www");
+/*
+gulp.task('clean-css', function(cb){
+  del(['./public/css'], function(err, paths){
+    cb();
+  });
+});*/
+
+gulp.task('clean-css', function(){
+ del.sync(['./public/css']);
+});
+
+gulp.task('clean-js', del.bind(null, ['./public/js']));
+
+gulp.task('clean', ['clean-css','clean-js']);
+
+gulp.task('default', ['clean'], function(){
+    gulp.start('build');
 });

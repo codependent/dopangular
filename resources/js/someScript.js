@@ -1,3 +1,4 @@
+/* jshint devel:true */
 function doSomeStuff(){
 	console.log("This stuff function symple says: hello!!");
 }
