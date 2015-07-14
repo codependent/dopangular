@@ -2,9 +2,18 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var del = require('del');
 
-gulp.task('clean-css', require('del').bind(null, ['./public/css']));
+gulp.task('clean-css', function(){
+ del.sync(['./public/css']);
+});
 
-gulp.task('clean-js', require('del').bind(null, ['./public/js']));
+/*
+gulp.task('clean-css', function(cb){
+  del(['./public/css'], function(err, paths){
+    cb();
+  });
+});*/
+
+gulp.task('clean-js', del.bind(null, ['./public/js']));
 
 gulp.task('clean', ['clean-css','clean-js']);
 
