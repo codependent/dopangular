@@ -4,9 +4,18 @@ var del = require('del');
 var argv = require('yargs').argv;
 var isDevelopment = (argv.development === undefined) ? false : true;
 
-gulp.task('clean-css', del(['./public/css']));
+gulp.task('clean-css', function(){
+ del.sync(['./public/css']);
+});
 
-gulp.task('clean-js', del(['./public/js']));
+/*
+gulp.task('clean-css', function(cb){
+  del(['./public/css'], function(err, paths){
+    cb();
+  });
+});*/
+
+gulp.task('clean-js', del.bind(null, ['./public/js']));
 
 gulp.task('clean', ['clean-css','clean-js']);
 
@@ -21,6 +30,7 @@ gulp.task('sass', ['clean-css'], function () {
     }
     stream.pipe(gulp.dest('./public/css'))
     stream.pipe(plugins.livereload());
+    return stream;
 });
 
 gulp.task('compress-js', ['clean-js'], function() {
@@ -34,6 +44,7 @@ gulp.task('compress-js', ['clean-js'], function() {
   }
   stream.pipe(gulp.dest('./public/js'))
   stream.pipe(plugins.livereload());
+  return stream;
 });
  
 gulp.task('build', ['sass','compress-js']);
