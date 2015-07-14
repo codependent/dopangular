@@ -18,7 +18,7 @@ gulp.task('clean-js', del.bind(null, ['./public/js']));
 gulp.task('clean', ['clean-css','clean-js']);
 
 gulp.task('sass', ['clean-css'], function () {
-  gulp.src('./resources/sass/**/*.scss')
+  return gulp.src('./resources/sass/**/*.scss')
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass({outputStyle: 'compressed'}).on('error', plugins.sass.logError))
     .pipe(plugins.rename({extname: '.min.css'}))
