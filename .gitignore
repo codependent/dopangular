@@ -4,5 +4,6 @@
 /public/js
 /public/css
 /node_modules
+/bower_components
 .sublime-gulp.cache
 sublime-gulp.log
