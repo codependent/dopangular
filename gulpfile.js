@@ -64,6 +64,11 @@ gulp.task('clean-js', del.bind(null, ['./public/js']));
 
 gulp.task('clean', ['clean-css','clean-js']);
 
+gulp.task('install', function(){
+  return gulp.src(['./bower.json', './package.json'])
+     .pipe(plugins.install());
+});
+
 gulp.task('default', function(cb){
-  runSequence('clean','build',cb);
+  runSequence('install','clean','build',cb);
 });
