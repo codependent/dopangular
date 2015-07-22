@@ -1,8 +1,9 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
+var runSequence = require('run-sequence');
 var del = require('del');
 
-gulp.task('serve', ['default','build'], function(){
+gulp.task('serve', ['default'], function(){
     plugins.livereload.listen();
     gulp.watch('./resources/sass/**/*.scss', ['sass']);
     gulp.watch('./resources/js/**/*.js', ['compress-js']);
@@ -75,6 +76,11 @@ gulp.task('clean-js', del.bind(null, ['./public/js']));
 
 gulp.task('clean', ['clean-css','clean-js']);
 
-gulp.task('default', ['clean'], function(){
-    gulp.start('build');
+gulp.task('install', function(){
+  return gulp.src(['./bower.json','./package.json'])
+    .pipe(plugins.debug())
+});
+
+gulp.task('default', ['clean'], function(cb){
+    runSequence('install','build',cb);
 });
