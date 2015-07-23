@@ -28,7 +28,16 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "jshint-stylish": "^2.0.1",
+    "karma": "^0.13.3",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-should": "0.0.1",
+    "mocha": "^2.2.5",
+    "requirejs": "^2.1.19",
     "run-sequence": "^1.1.2",
+    "should": "^6.0.2",
     "yargs": "^3.15.0"
   }
 }

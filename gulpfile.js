@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var del = require('del');
+var karmaServer = require('karma').Server;
 var argv = require('yargs').argv;
 var isDevelopment = (argv.development === undefined) ? false : true;
 
@@ -67,6 +68,13 @@ gulp.task('clean', ['clean-css','clean-js']);
 gulp.task('install', function(){
   return gulp.src(['./bower.json', './package.json'])
      .pipe(plugins.install());
+});
+
+gulp.task('test', function (cb) {
+  new karmaServer({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: false
+  }, cb).start();
 });
 
 gulp.task('default', function(cb){
