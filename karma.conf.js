@@ -44,7 +44,7 @@ module.exports = function(config) {
     urlRoot: '/__karma__/',
 
     proxies : {
-      '/': 'http://localhost:3000'
+      '/': 'http://localhost:3000/'
     },
 
     // web server port
