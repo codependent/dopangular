@@ -10,9 +10,10 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'should'],
+    frameworks: ['ng-scenario','mocha', 'should'],
 
-    plugins: ['karma-mocha',
+    plugins: ['karma-ng-scenario',
+              'karma-mocha',
               'karma-should',
               'karma-chrome-launcher',
               'karma-firefox-launcher'],
@@ -40,10 +41,14 @@ module.exports = function(config) {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 
+    urlRoot: '/__karma__/',
+
+    proxies : {
+      '/': 'http://localhost:3000'
+    },
 
     // web server port
     port: 9876,
-
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
@@ -51,7 +56,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes

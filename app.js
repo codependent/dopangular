@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public'), {setHeaders : setStaticGZ
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.use('/', routes);
+app.use('/index', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
