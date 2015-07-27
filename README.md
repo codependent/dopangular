@@ -7,4 +7,4 @@ Sample Express powered project with a configured `gulpfile.js` to
 4. Test the application using Karma
 5. Launch a server
 
-Additionally includes Material Design Lite.
+Additionally includes **Material Design Lite** and **Polymer 1.0** components.
