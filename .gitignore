@@ -3,6 +3,7 @@
 *.css
 /public/js
 /public/css
+/public/polymer
 /node_modules
 /bower_components
 .sublime-gulp.cache
