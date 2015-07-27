@@ -2,11 +2,20 @@ doctype html
 html
   head
     title= title
+    
+    <!-- Polymer -->
+    script(src="bower_components/webcomponentsjs/webcomponents-lite.js")
+    link(rel="import" href="bower_components/polymer/polymer.html")
+    <!-- Jade nav-menu version: -->
+    include polymer/nav-menu
+    <!-- Plain HTHML nav-menu version: link(rel="import" href="polymer/nav-menu.html") -->
 
+    <!-- Material Design Lite -->
     link(rel="stylesheet", href="/bower_components/material-design-lite/material.min.css")
     script(src="/bower_components/material-design-lite/material.min.js")
     link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
     
+    <!-- App -->
     link(rel='stylesheet', href='/css/style.min.css')
     script(src='/js/someScript.min.js')
   body
@@ -22,14 +31,7 @@ html
         
           div(class="mdl-textfield__expandable-holder")
             input(class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp")
-        
-    div(class="mdl-layout__drawer")
-      span(class="mdl-layout-title") Express
-      nav(class="mdl-navigation")
-        a(class="mdl-navigation__link" href="") Link 1
-        a(class="mdl-navigation__link" href="") Link 2
-        a(class="mdl-navigation__link" href="") Link 3
-        a(class="mdl-navigation__link" href="") Link 4
+    nav-menu(class="mdl-layout__drawer")
     
     div(class="demo-ribbon")
     main(class="demo-main mdl-layout__content")
