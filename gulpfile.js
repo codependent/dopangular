@@ -10,6 +10,7 @@ gulp.task('serve', ['default'], function(){
     plugins.livereload.listen();
     gulp.watch('./resources/sass/**/*.scss', ['sass']);
     gulp.watch('./resources/js/**/*.js', ['compress-js']);
+    gulp.watch('./resources/polymer/**/*.html', ['polymer']);
     require("./bin/www");
 });
 
@@ -47,8 +48,15 @@ gulp.task('compress-js', function() {
   stream.pipe(plugins.livereload());
   return stream;
 });
+
+gulp.task('polymer', function() {
+  var stream = gulp.src('./resources/polymer/**/*.html')
+  stream.pipe(gulp.dest('./public/polymer'))
+  stream.pipe(plugins.livereload());
+  return stream;
+});
  
-gulp.task('build', ['jshint','compress-js','sass']);
+gulp.task('build', ['jshint','compress-js','polymer','sass']);
 
 /*
 gulp.task('clean-css', function(cb){
@@ -61,9 +69,13 @@ gulp.task('clean-css', function(){
  del.sync(['./public/css']);
 });
 
+gulp.task('clean-polymer', function(cb){
+ del(['./public/polymer'], cb);
+});
+
 gulp.task('clean-js', del.bind(null, ['./public/js']));
 
-gulp.task('clean', ['clean-css','clean-js']);
+gulp.task('clean', ['clean-css','clean-js','clean-polymer']);
 
 gulp.task('install', function(){
   return gulp.src(['./bower.json', './package.json'])
