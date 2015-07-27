@@ -1,4 +1,4 @@
-# Dopangular
+# DopAngular
 Angular2 project with the following doping substances:
 
 1. **Express 4**.
