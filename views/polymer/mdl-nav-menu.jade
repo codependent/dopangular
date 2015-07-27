@@ -1,0 +1,32 @@
+dom-module(id="mdl-nav-menu")
+
+  template
+    span(class="mdl-layout-title") Menu
+    nav(class="mdl-navigation")
+      content
+    
+  script.
+    Polymer({
+      is: "mdl-nav-menu"
+    });
+  
+
+dom-module(id="mdl-nav-menu-item")
+
+  template
+    a(class="mdl-navigation__link" href="{{href}}") {{text}}
+
+  script.
+    Polymer({
+      is: "mdl-nav-menu-item",
+      properties: {
+        text: {
+          type: String,
+          value: ""
+        },
+        href: {
+          type: String,
+          value: ""
+        }
+      }
+    });
