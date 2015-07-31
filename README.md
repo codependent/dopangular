@@ -11,5 +11,6 @@ Angular2 project with the following doping substances:
 To run the project
 
 1. Install the TypeScript definitions: `npm install -g tsd@^0.6.0`.
-2. Install the project dependencies `gulp install`.
-3. And finally run the project: `gulp serve`.
+2. Install the project dependencies `npm install`.
+3. Install the rest of the project dependencies with `gulp install`.
+4. Launch the project: `gulp serve`.

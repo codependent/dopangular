@@ -1,5 +1,5 @@
 {
-  "name": "mdl-sample-project",
+  "name": "dopangular",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -26,7 +26,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.3",
     "gulp-sourcemaps": "^1.5.2",
-    "gulp-tsc": "https://github.com/codependent/gulp-tsc/tarball/master",
+    "gulp-tsc": "1.1.0",
     "gulp-uglify": "^1.2.0",
     "jshint-stylish": "^2.0.1",
     "karma": "^0.12.31",
