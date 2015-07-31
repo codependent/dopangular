@@ -59,7 +59,7 @@ gulp.task('polymer', function() {
 
 gulp.task('compile-ts', function(){
   return gulp.src(['resources/angular/**/*.ts'])
-    .pipe(typescript({target : "ES5", module : "commonjs" }))
+    .pipe(typescript({target : "ES5", module : "commonjs", emitDecoratorMetadata : true }))
     .pipe(gulp.dest('./public/angular/'))
     .pipe(plugins.livereload());
 });

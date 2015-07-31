@@ -2,23 +2,30 @@
 
 import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
 
-// Annotation section
+class TechnologiesService {
+  technologies: Array<string>;
+  constructor() {
+    this.technologies = ['Angular 2 Developer Preview', 'Express', 'Jade', 'Gulp', 'Material Design Lite', 'Polymer', 'Sass', 'Karma', 'Mocha', 'Should', 'npm', 'Bower'];
+  }
+}
+
+
 @Component({
-  selector: 'my-app'
+  selector: 'my-app',
+  appInjector: [TechnologiesService]
 })
 @View({
   templateUrl: 'index-angular',
   directives:[NgFor]
 })
-// Component controller
+
 class MyAppComponent {
   name: string;
   technologies: Array<string>;
-  //technologies : string[]
   
-  constructor() {
+  constructor(technologiesService: TechnologiesService) {
     this.name = 'DopAngular';
-    this.technologies = ['Angular 2 Developer Preview', 'Express', 'Jade', 'Gulp', 'Material Design Lite', 'Polymer', 'Sass', 'Karma', 'Mocha', 'Should', 'npm', 'Bower'];
+    this.technologies = technologiesService.technologies;
   }
 }
 

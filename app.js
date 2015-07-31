@@ -63,7 +63,7 @@ app.use(function(err, req, res, next) {
 
 function setStaticGZipHeaders(res, path){  
   if(path.endsWith(".js")){
-    if(path.indexOf("angular")==-1){
+    if(path.indexOf("\\angular\\")==-1){
       res.set({'Content-Encoding': 'gzip' , 'Content-type' : 'text/javascript'});
     }
   }else if(path.endsWith(".css")){
