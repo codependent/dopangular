@@ -1,14 +1,7 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
-
+/// <reference path="services.ts" />
 import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
-
-class TechnologiesService {
-  technologies: Array<string>;
-  constructor() {
-    this.technologies = ['Angular 2 Developer Preview', 'Express', 'Jade', 'Gulp', 'Material Design Lite', 'Polymer', 'Sass', 'Karma', 'Mocha', 'Should', 'npm', 'Bower'];
-  }
-}
-
+import {TechnologiesService} from 'angular/services'
 
 @Component({
   selector: 'my-app',
