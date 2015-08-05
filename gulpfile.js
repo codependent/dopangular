@@ -9,22 +9,22 @@ var isDevelopment = (argv.development === undefined) ? false : true;
 
 gulp.task('serve', ['default'], function(){
     plugins.livereload.listen();
-    gulp.watch('./resources/sass/**/*.scss', ['sass']);
-    gulp.watch('./resources/js/**/*.js', ['compress-js']);
-    gulp.watch('./resources/polymer/**/*.html', ['polymer']);
-    gulp.watch('./resources/angular/**/*.ts', ['compile-ts']);
+    gulp.watch('./lib/resources/sass/**/*.scss', ['sass']);
+    gulp.watch('./lib/resources/js/**/*.js', ['compress-js']);
+    gulp.watch('./lib/resources/polymer/**/*.html', ['polymer']);
+    gulp.watch('./lib/resources/angular/**/*.ts', ['compile-ts']);
     require("./bin/www");
 });
 
 gulp.task('jshint', function () {
-  return gulp.src('./resources/js/**/*.js')
+  return gulp.src('./lib/resources/js/**/*.js')
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'))
     .pipe(plugins.jshint.reporter('fail'));
 });
 
 gulp.task('sass', function () {
-  var stream = gulp.src('./resources/sass/**/*.scss')
+  var stream = gulp.src('./lib/resources/sass/**/*.scss')
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass({outputStyle: 'compressed'}).on('error', plugins.sass.logError))
     .pipe(plugins.rename({extname: '.min.css'}))
@@ -38,7 +38,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('compress-js', function() {
-  var stream = gulp.src('./resources/js/**/*.js')
+  var stream = gulp.src('./lib/resources/js/**/*.js')
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.uglify())
     .pipe(plugins.rename({extname: '.min.js'}))
@@ -52,13 +52,13 @@ gulp.task('compress-js', function() {
 });
 
 gulp.task('polymer', function() {
-  return gulp.src('./resources/polymer/**/*.html')
+  return gulp.src('./lib/resources/polymer/**/*.html')
     .pipe(gulp.dest('./public/polymer'))
     .pipe(plugins.livereload());
 });
 
 gulp.task('compile-ts', function(){
-  return gulp.src(['resources/angular/**/*.ts'])
+  return gulp.src(['./lib/resources/angular/**/*.ts'])
     .pipe(typescript({target : "ES5", module : "commonjs", emitDecoratorMetadata : true }))
     .pipe(gulp.dest('./public/angular/'))
     .pipe(plugins.livereload());
