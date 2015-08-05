@@ -3,7 +3,7 @@ var plugins = require('gulp-load-plugins')();
 var typescript = require('gulp-tsc');
 var runSequence = require('run-sequence');
 var del = require('del');
-var karmaServer = require('karma').Server;
+var karmaServer = require('karma').server;
 var argv = require('yargs').argv;
 var isDevelopment = (argv.development === undefined) ? false : true;
 
@@ -96,10 +96,11 @@ gulp.task('install', function(){
 });
 
 gulp.task('test', function (cb) {
-  new karmaServer({
+  console.log(karmaServer);
+  new karmaServer.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: false
-  }, cb).start();
+  }, cb);
 });
 
 gulp.task('default', function(cb){
