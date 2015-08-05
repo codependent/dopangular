@@ -1,9 +1,10 @@
+doctype html
 script.
   doSomeStuff();
 
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 div(class="mdl-layout mdl-js-layout mdl-color--grey-100 mdl-layout--fixed-drawer mdl-layout--fixed-header")
-  header( class="mdl-layout__header")
+  header(class="mdl-layout__header")
     div(class="mdl-layout__header-row")
       div(class="mdl-layout-spacer")
       div(class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right")
@@ -23,6 +24,10 @@ div(class="mdl-layout mdl-js-layout mdl-color--grey-100 mdl-layout--fixed-drawer
     div(class="demo-container mdl-grid")
       div(class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone")
       div(class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col")
+
+        input( cosa #sometext)
+        button((click)="addTechnology(sometext.value)") Add
+        {{randomText}}
         div(class="demo-crumbs mdl-color-text--grey-500")
           | Codependent &gt; Welcome to DopAngular
         h3

@@ -20,6 +20,9 @@ class MyAppComponent {
     this.name = 'DopAngular';
     this.technologies = technologiesService.technologies;
   }
+  addTechnology(tech: string){
+    this.technologies.push(tech);   
+  }
 }
 
 bootstrap(MyAppComponent);

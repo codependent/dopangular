@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'), {setHeaders : setStaticGZipHeaders}));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/jspm_packages',  express.static(__dirname + '/jspm_packages'));
 
 app.use('/', routes);
 
