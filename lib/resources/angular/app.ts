@@ -21,7 +21,14 @@ class MyAppComponent {
     this.technologies = technologiesService.technologies;
   }
   addTechnology(tech: string){
-    this.technologies.push(tech);   
+    this.technologies.push(tech);
+    tech = null;   
+  }
+  doneTyping($event) {
+    if($event.which === 13) {
+      this.technologies.push($event.target.value);
+      $event.target.value = null;
+    }
   }
 }
 
