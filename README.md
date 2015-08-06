@@ -1,5 +1,5 @@
 # DopAngular
-Angular2 project with the following doping substances:
+**Angular2** project with the following doping substances:
 
 1. **Express 4**.
 2. **Jade** template engine.
