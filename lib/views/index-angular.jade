@@ -32,9 +32,9 @@ div(class="mdl-layout mdl-js-layout mdl-color--grey-100 mdl-layout--fixed-drawer
           | This is a PoT application integrating the following technologies:  
 
         div
-          input(cosa #sometext (keyup)="doneTyping($event)")
-          button((click)="addTechnology(sometext.value)") Add
+          input(#sometext (keyup)="doneTyping($event)")
+          button((click)="addTechnology(sometext)") Add
 
         ul  
-          li(*ng-for="#technology of technologies")
-            {{technology}}
+          li(*ng-for="#technology of technologies") 
+            | {{technology}}

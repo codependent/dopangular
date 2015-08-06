@@ -11,7 +11,6 @@ import {TechnologiesService} from 'angular/services'
   templateUrl: 'index-angular',
   directives:[NgFor]
 })
-
 class MyAppComponent {
   name: string;
   technologies: Array<string>;
@@ -20,12 +19,14 @@ class MyAppComponent {
     this.name = 'DopAngular';
     this.technologies = technologiesService.technologies;
   }
-  addTechnology(tech: string){
-    this.technologies.push(tech);
-    tech = null;   
+  addTechnology(tech: HTMLInputElement) {
+    if (tech.value.trim() != "") { 
+      this.technologies.push(tech.value);
+      tech.value = null;
+    }
   }
   doneTyping($event) {
-    if($event.which === 13) {
+    if($event.which === 13 && $event.target.value.trim() != "") {
       this.technologies.push($event.target.value);
       $event.target.value = null;
     }
