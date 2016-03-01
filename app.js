@@ -21,7 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'), {setHeaders : setStaticGZipHeaders}));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use('/jspm_packages',  express.static(__dirname + '/jspm_packages'));
+app.use('/app',  express.static(__dirname + '/lib/resources/app'));
 
 app.use('/', routes);
 
@@ -60,7 +62,7 @@ app.use(function(err, req, res, next) {
 
 function setStaticGZipHeaders(res, path){  
   if(path.endsWith(".js")){
-    if(path.indexOf("\\angular\\")==-1){
+    if(path.indexOf("\\app\\")==-1){
       res.set({'Content-Encoding': 'gzip' , 'Content-type' : 'text/javascript'});
     }
   }else if(path.endsWith(".css")){

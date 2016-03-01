@@ -12,7 +12,7 @@ gulp.task('serve', ['default'], function(){
     gulp.watch('./lib/resources/sass/**/*.scss', ['sass']);
     gulp.watch('./lib/resources/js/**/*.js', ['compress-js']);
     gulp.watch('./lib/resources/polymer/**/*.html', ['polymer']);
-    gulp.watch('./lib/resources/angular/**/*.ts', ['compile-ts']);
+    gulp.watch('./lib/resources/app/**/*.ts', ['compile-ts']);
     require("./bin/www");
 });
 
@@ -58,9 +58,11 @@ gulp.task('polymer', function() {
 });
 
 gulp.task('compile-ts', function(){
-  return gulp.src(['./lib/resources/angular/**/*.ts'])
-    .pipe(typescript({target : "ES5", module : "commonjs", emitDecoratorMetadata : true }))
-    .pipe(gulp.dest('./public/angular/'))
+  return gulp.src(['./lib/resources/app/**/*.ts'])
+    .pipe(typescript({"target": "es5", "module": "system", "moduleResolution": "node", "sourceMap": true,
+                      "experimentalDecorators": true, "emitDecoraasdftorMetadata": true, "removeComments": false,
+                      "noImplicitAny": false, "sourceRoot": ""}))
+    .pipe(gulp.dest('./public/app/'))
     .pipe(plugins.livereload());
 });
 
@@ -83,7 +85,7 @@ gulp.task('clean-polymer', function(cb){
 });
 
 gulp.task('clean-ts', function(cb){
- del(['./public/angular'], cb);
+ del(['./public/app'], cb);
 });
 
 gulp.task('clean-js', del.bind(null, ['./public/js']));
