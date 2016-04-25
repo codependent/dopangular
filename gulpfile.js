@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var typescript = require('gulp-tsc');
+var ts = require('gulp-typescript');
 var runSequence = require('run-sequence');
 var del = require('del');
 var karmaServer = require('karma').server;
@@ -66,8 +67,20 @@ gulp.task('compile-ts', function(){
     .pipe(plugins.livereload());
 });
 
+gulp.task('compile-typescript', function () {
+    var tsProject = ts.createProject('tsconfig.json');
+    var tsResult = gulp.src([
+        './lib/resources/app/**/*.ts',
+    ])        
+        .pipe(plugins.sourcemaps.init())
+        .pipe(ts(tsProject))
+    return tsResult.js
+        .pipe(plugins.sourcemaps.write())
+        .pipe(gulp.dest('./public/app/'));
+});
+
  
-gulp.task('build', ['jshint','compress-js','compile-ts','polymer','sass']);
+gulp.task('build', ['jshint','compress-js','compile-typescript','polymer','sass']);
 
 /*
 gulp.task('clean-css', function(cb){
